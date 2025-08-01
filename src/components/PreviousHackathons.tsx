@@ -3,11 +3,11 @@ import { ExternalLink } from 'lucide-react';
 
 const PreviousHackathons = () => {
   const hackathons = [
-    { name: 'United Hacks V1', year: '2020', participants: '500+', image: 'https://images.pexels.com/photos/1181671/pexels-photo-1181671.jpeg?auto=compress&cs=tinysrgb&w=400' },
-    { name: 'United Hacks V2', year: '2021', participants: '1,000+', image: 'https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg?auto=compress&cs=tinysrgb&w=400' },
-    { name: 'United Hacks V3', year: '2021', participants: '1,500+', image: 'https://images.pexels.com/photos/1181677/pexels-photo-1181677.jpeg?auto=compress&cs=tinysrgb&w=400' },
-    { name: 'United Hacks V4', year: '2022', participants: '2,000+', image: 'https://images.pexels.com/photos/1181682/pexels-photo-1181682.jpeg?auto=compress&cs=tinysrgb&w=400' },
-    { name: 'United Hacks V5', year: '2023', participants: '3,000+', image: 'https://images.pexels.com/photos/1181686/pexels-photo-1181686.jpeg?auto=compress&cs=tinysrgb&w=400' },
+    { name: 'United Hacks V1', year: '2023', participants: '500+', image: '/HackUnitedLogo.webp' },
+    { name: 'United Hacks V2', year: '2024', participants: '1,000+', image: '/HackUnitedLogo2.webp' },
+    { name: 'United Hacks V3', year: '2024', participants: '1,000+', image: '/HackUnitedLogo3.jpeg' },
+    { name: 'United Hacks V4', year: '2025 January', participants: '1,000+', image: '/HackUnitedLogo.webp' },
+    { name: 'United Hacks V5', year: '2025 June', participants: '1,200+', image: '/HackUnitedLogo2.webp' },
   ];
 
   return (

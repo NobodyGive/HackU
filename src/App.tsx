@@ -6,6 +6,7 @@ import PreviousHackathons from './components/PreviousHackathons';
 import WhyParticipate from './components/WhyParticipate';
 import Explore from './components/Explore';
 import Judges from './components/Judges';
+import Requirements from './components/Requirements';
 import FAQ from './components/FAQ';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
@@ -37,6 +38,7 @@ function App() {
       <WhyParticipate />
       <Explore />
       <Judges />
+      <Requirements />
       <FAQ />
       <Contact />
       <Footer />

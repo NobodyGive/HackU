@@ -27,15 +27,19 @@ const FAQ = () => {
     },
     {
       question: 'How will projects be judged?',
-      answer: 'Projects are evaluated based on technical complexity, innovation, UI/UX, real-world impact, and presentation quality.'
+      answer: 'Projects are evaluated based on Creativity (20%), Practicality (20%), Presentation (20%), Design (20%), and Technical Complexity (20%).'
     },
     {
       question: 'When is the deadline to register?',
-      answer: 'Registration closes 24 hours before the hackathon begins. Register early to secure your spot!'
+      answer: 'Registration is open now! Make sure to sign up on Devpost, complete the Google Form, and join our Discord server.'
     },
     {
       question: 'Will there be mentorship available?',
       answer: 'Yes! Industry experts will be available throughout the event to provide guidance and answer technical questions.'
+    },
+    {
+      question: 'What do I need to submit?',
+      answer: 'You need to submit: 1) Public GitHub repository, 2) Demo video (2-5 mins), 3) Written explanation via Devpost. Live demo link is optional but helpful.'
     }
   ];
 

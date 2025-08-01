@@ -34,11 +34,11 @@ const Judges = () => {
   ];
 
   const criteria = [
-    { category: 'Technical Complexity', weight: '25%', description: 'Code quality, architecture, and implementation' },
-    { category: 'Innovation', weight: '25%', description: 'Originality and creative problem-solving' },
-    { category: 'UI/UX', weight: '20%', description: 'User experience and interface design' },
-    { category: 'Impact', weight: '20%', description: 'Real-world applicability and potential' },
-    { category: 'Presentation', weight: '10%', description: 'Demo quality and communication' }
+    { category: 'Creativity', weight: '20%', description: 'Is the project a new idea? Does it provide a new experience or simplify an existing workflow?' },
+    { category: 'Practicality', weight: '20%', description: 'Could this idea actually be implemented in real life? Would people be motivated to use it?' },
+    { category: 'Presentation', weight: '20%', description: 'Is the project pitched convincingly? Is there a working demonstration?' },
+    { category: 'Design', weight: '20%', description: 'Is the UI design user-friendly and intuitive? Does it enhance user experience?' },
+    { category: 'Technical Complexity', weight: '20%', description: 'Does the project involve complex technologies? How relevant are the solutions?' }
   ];
 
   const sponsors = [
