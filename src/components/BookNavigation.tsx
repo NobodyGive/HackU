@@ -61,7 +61,7 @@ const BookNavigation: React.FC<BookNavigationProps> = ({
 
       {/* Page Counter */}
       <div className="fixed bottom-6 left-1/2 transform -translate-x-1/2 z-40">
-        <div className="bg-white bg-opacity-90 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg border border-gray-200">
+        <div className="bg-white bg-opacity-95 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg border border-gray-200">
           <span className="text-sm font-medium text-gray-700">
             Page {currentPage + 1} of {totalPages}
           </span>
@@ -72,7 +72,7 @@ const BookNavigation: React.FC<BookNavigationProps> = ({
       <div className="fixed top-20 right-4 z-40">
         <button
           onClick={() => setShowTableOfContents(!showTableOfContents)}
-          className="p-3 bg-white bg-opacity-90 backdrop-blur-sm rounded-full shadow-lg border border-gray-200 hover:bg-blue-50 hover:text-blue-600 transition-all duration-300"
+          className="p-3 bg-white bg-opacity-95 backdrop-blur-sm rounded-full shadow-lg border border-gray-200 hover:bg-blue-50 hover:text-blue-600 transition-all duration-300"
           title="Table of Contents"
         >
           <BookOpen size={20} />

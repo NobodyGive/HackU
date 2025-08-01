@@ -2,24 +2,43 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Book-style page background */
-.book-page {
-  background: linear-gradient(135deg, #fefefe 0%, #f8f9fa 100%);
-  position: relative;
+/* Lined Notebook Paper Background */
+.notebook-paper-bg {
+  background-color: #fefefe;
+  background-image: 
+    /* Horizontal lines - like notebook paper */
+    linear-gradient(to bottom, transparent 0px, transparent 23px, #3b82f6 23px, #3b82f6 24px, transparent 24px, transparent 47px),
+    /* Left margin line - red line like real notebooks */
+    linear-gradient(to right, transparent 0px, transparent 79px, #ef4444 79px, #ef4444 81px, transparent 81px);
+  background-size: 100% 24px, 100% 100%;
+  background-repeat: repeat-y, no-repeat;
+  opacity: 0.6;
 }
 
-.book-page::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+/* Alternative notebook background for better contrast on dark sections */
+.notebook-paper-bg-alt {
+  background-color: #f8fafc;
   background-image: 
-    linear-gradient(to right, rgba(59, 130, 246, 0.1) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(59, 130, 246, 0.05) 1px, transparent 1px);
-  background-size: 30px 30px;
-  pointer-events: none;
+    /* Horizontal lines with slightly more opacity */
+    linear-gradient(to bottom, transparent 0px, transparent 23px, #2563eb 23px, #2563eb 24px, transparent 24px, transparent 47px),
+    /* Left margin line */
+    linear-gradient(to right, transparent 0px, transparent 79px, #dc2626 79px, #dc2626 81px, transparent 81px);
+  background-size: 100% 24px, 100% 100%;
+  background-repeat: repeat-y, no-repeat;
+  opacity: 0.4;
+}
+
+/* Responsive adjustments for mobile */
+@media (max-width: 768px) {
+  .notebook-paper-bg,
+  .notebook-paper-bg-alt {
+    background-image: 
+      /* Horizontal lines - slightly closer together on mobile */
+      linear-gradient(to bottom, transparent 0px, transparent 19px, #3b82f6 19px, #3b82f6 20px, transparent 20px, transparent 39px),
+      /* Left margin line - closer to edge on mobile */
+      linear-gradient(to right, transparent 0px, transparent 39px, #ef4444 39px, #ef4444 41px, transparent 41px);
+    background-size: 100% 20px, 100% 100%;
+  }
 }
 
 /* Page transition animations */

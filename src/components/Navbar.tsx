@@ -29,7 +29,7 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigateToPage }) => {
 
   return (
     <nav className={`w-full z-50 transition-all duration-300 ${
-      scrolled ? 'bg-gray-900/95 backdrop-blur-md border-b border-blue-500/20' : 'bg-gray-900/90 backdrop-blur-sm'
+      scrolled ? 'bg-white/95 backdrop-blur-md border-b border-blue-200 shadow-sm' : 'bg-white/90 backdrop-blur-sm border-b border-gray-100'
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
@@ -49,7 +49,7 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigateToPage }) => {
                 <a
                   key={item.id}
                   href={`#${item.id}`}
-                  className="text-gray-300 hover:text-blue-400 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200"
+                  className="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200"
                 >
                   {item.name}
                 </a>
@@ -60,7 +60,7 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigateToPage }) => {
           <div className="md:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="text-gray-400 hover:text-white focus:outline-none focus:text-white"
+              className="text-gray-600 hover:text-gray-900 focus:outline-none focus:text-gray-900"
             >
               {isOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -70,12 +70,12 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigateToPage }) => {
 
       {isOpen && (
         <div className="md:hidden">
-          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-gray-900/95 backdrop-blur-md">
+          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white/95 backdrop-blur-md border-t border-gray-200">
             {navItems.map((item) => (
               <a
                 key={item.id}
                 href={`#${item.id}`}
-                className="text-gray-300 hover:text-blue-400 block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200"
+                className="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200"
                 onClick={() => setIsOpen(false)}
               >
                 {item.name}
