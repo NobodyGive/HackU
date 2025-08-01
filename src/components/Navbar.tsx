@@ -22,9 +22,13 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <div className="flex-shrink-0">
-            <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-              United Hacks V6
-            </h1>
+            <a href="#home" className="flex items-center">
+              <img 
+                src="/HackUnitedLogo2.webp" 
+                alt="United Hacks V6" 
+                className="h-10 w-auto"
+              />
+            </a>
           </div>
           
           <div className="hidden md:block">

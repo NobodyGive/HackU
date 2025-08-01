@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Mail, MessageSquare, Users, Instagram } from 'lucide-react';
+import { Mail, MessageSquare, Users, Instagram, Linkedin } from 'lucide-react';
 
 const Contact = () => {
   const [email, setEmail] = useState('');
@@ -39,7 +39,9 @@ const Contact = () => {
 
             <div className="grid grid-cols-3 gap-4">
               <a
-                href="#"
+                href="https://discord.gg/hackunited"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="flex flex-col items-center p-6 bg-gradient-to-br from-gray-800 to-gray-700 rounded-xl border border-gray-600 hover:border-blue-500/50 transition-all duration-300 group"
               >
                 <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-purple-600 rounded-lg flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
@@ -49,17 +51,21 @@ const Contact = () => {
               </a>
 
               <a
-                href="#"
+                href="https://www.linkedin.com/company/hack-united/posts/?feedView=all"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="flex flex-col items-center p-6 bg-gradient-to-br from-gray-800 to-gray-700 rounded-xl border border-gray-600 hover:border-blue-500/50 transition-all duration-300 group"
               >
                 <div className="w-12 h-12 bg-gradient-to-r from-blue-600 to-blue-700 rounded-lg flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
-                  <Users className="text-white" size={24} />
+                  <Linkedin className="text-white" size={24} />
                 </div>
                 <span className="text-white font-medium">LinkedIn</span>
               </a>
 
               <a
-                href="#"
+                href="https://www.instagram.com/hack_united/"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="flex flex-col items-center p-6 bg-gradient-to-br from-gray-800 to-gray-700 rounded-xl border border-gray-600 hover:border-blue-500/50 transition-all duration-300 group"
               >
                 <div className="w-12 h-12 bg-gradient-to-r from-pink-500 to-pink-600 rounded-lg flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">

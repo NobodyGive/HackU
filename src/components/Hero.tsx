@@ -21,12 +21,13 @@ const Hero = () => {
 
     // Camera setup
     const camera = new THREE.PerspectiveCamera(
-      75,
+      60, // Reduced FOV for better perspective
       mountRef.current.clientWidth / mountRef.current.clientHeight,
       0.1,
       1000
     );
-    camera.position.set(0, 0, 8); // Moved camera back to accommodate larger model
+    camera.position.set(0, 2, 12); // Moved camera back and up to see the full model
+    camera.lookAt(0, 0, 0); // Ensure camera is looking at the center
 
     // Renderer setup
     const renderer = new THREE.WebGLRenderer({ 
@@ -41,99 +42,84 @@ const Hero = () => {
 
     mountRef.current.appendChild(renderer.domElement);
 
-    // Lighting - Holographic blue theme for earth globe
-    const ambientLight = new THREE.AmbientLight(0x1E3A8A, 0.4); // Blue ambient light
+    // Lighting - Enhanced lighting for the new 3D model
+    const ambientLight = new THREE.AmbientLight(0x404040, 0.6); // Balanced ambient light
     scene.add(ambientLight);
 
-    const directionalLight = new THREE.DirectionalLight(0x3B82F6, 1.8); // Bright blue directional light
+    const directionalLight = new THREE.DirectionalLight(0xffffff, 1.2); // Main directional light
     directionalLight.position.set(5, 5, 5);
     directionalLight.castShadow = true;
     scene.add(directionalLight);
 
-    const pointLight = new THREE.PointLight(0x60A5FA, 2.5, 100); // Very bright blue point light
+    const pointLight = new THREE.PointLight(0x60A5FA, 1.5, 100); // Blue accent light
     pointLight.position.set(0, 2, 2);
     scene.add(pointLight);
 
-    // Holographic accent lights
-    const accentLight1 = new THREE.SpotLight(0x2563EB, 1.5, 50, Math.PI / 6, 0.5);
+    // Additional accent lights for better model visibility
+    const accentLight1 = new THREE.SpotLight(0xffffff, 1.0, 50, Math.PI / 6, 0.5);
     accentLight1.position.set(-3, 3, 3);
     scene.add(accentLight1);
 
-    const accentLight2 = new THREE.PointLight(0x1D4ED8, 1.2, 30);
+    const accentLight2 = new THREE.PointLight(0x1D4ED8, 0.8, 30);
     accentLight2.position.set(3, -2, 1);
     scene.add(accentLight2);
 
-    // Holographic rim light
-    const rimLight = new THREE.DirectionalLight(0x1E40AF, 1.0);
+    // Rim light for depth
+    const rimLight = new THREE.DirectionalLight(0x1E40AF, 0.8);
     rimLight.position.set(-5, 0, -5);
     scene.add(rimLight);
 
-    // Additional holographic glow
-    const glowLight = new THREE.PointLight(0x00FFFF, 1.0, 40);
+    // Holographic glow effect
+    const glowLight = new THREE.PointLight(0x00FFFF, 0.8, 40);
     glowLight.position.set(0, 0, 3);
     scene.add(glowLight);
 
     // Load textures
     const textureLoader = new THREE.TextureLoader();
-    const earthTexture = textureLoader.load(
-      '/earth_emission_color_and_alpha.png',
+    const modelTexture = textureLoader.load(
+      '/_0731232307_texture.png',
       undefined,
       undefined,
-      (error) => console.error('Error loading earth texture:', error)
-    );
-    const raysTexture = textureLoader.load(
-      '/rays_color_and_alpha.png',
-      undefined,
-      undefined,
-      (error) => console.error('Error loading rays texture:', error)
+      (error) => console.error('Error loading model texture:', error)
     );
 
     // Load FBX model
     const loader = new FBXLoader();
     loader.load(
-      '/earth_globe_hologram.fbx',
+      '/_0731232307_texture.fbx',
       (object) => {
-        // Scale and position the model - Earth globe hologram
-        object.scale.setScalar(0.05); // Adjusted for earth globe size
-        object.position.set(0, 0, 0);
+        console.log('Model loaded successfully:', object);
+        console.log('Model children:', object.children);
+        
+        // Calculate model bounds to ensure proper positioning
+        const box = new THREE.Box3().setFromObject(object);
+        const size = box.getSize(new THREE.Vector3());
+        const center = box.getCenter(new THREE.Vector3());
+        
+        console.log('Model bounds:', { size, center });
+        
+        // Scale the model to fit within view
+        const maxDimension = Math.max(size.x, size.y, size.z);
+        const scale = 8 / maxDimension; // Scale to fit within 8 units
+        object.scale.setScalar(scale);
+        
+        // Center the model
+        object.position.set(-center.x * scale, -center.y * scale, -center.z * scale);
         
         // Apply textures to the model
         object.traverse((child) => {
           if (child instanceof THREE.Mesh) {
+            console.log('Processing mesh:', child.name, child.position);
             child.castShadow = true;
             child.receiveShadow = true;
             
-            // Apply textures based on material names or mesh names
+            // Apply texture to all materials
             if (child.material) {
-              const materialName = child.material.name.toLowerCase();
-              const meshName = child.name.toLowerCase();
-              
-              // Apply earth texture to earth-related materials
-              if (materialName.includes('earth') || meshName.includes('earth') || 
-                  materialName.includes('globe') || meshName.includes('globe')) {
-                child.material.map = earthTexture;
-                child.material.emissiveMap = earthTexture;
-                child.material.emissive = new THREE.Color(0x00ffff);
-                child.material.emissiveIntensity = 0.5;
-                child.material.transparent = true;
-                child.material.opacity = 0.9;
-              } 
-              // Apply rays texture to ray-related materials
-              else if (materialName.includes('rays') || meshName.includes('rays') ||
-                       materialName.includes('hologram') || meshName.includes('hologram')) {
-                child.material.map = raysTexture;
-                child.material.transparent = true;
-                child.material.opacity = 0.8;
-                child.material.blending = THREE.AdditiveBlending;
-              }
-              // Apply default holographic effect to other materials
-              else {
-                child.material.transparent = true;
-                child.material.opacity = 0.7;
-                child.material.emissive = new THREE.Color(0x00ffff);
-                child.material.emissiveIntensity = 0.3;
-              }
-              
+              child.material.map = modelTexture;
+              child.material.transparent = true;
+              child.material.opacity = 0.9;
+              child.material.emissive = new THREE.Color(0x00ffff);
+              child.material.emissiveIntensity = 0.3;
               child.material.needsUpdate = true;
             }
           }
@@ -141,6 +127,24 @@ const Hero = () => {
 
         modelRef.current = object;
         scene.add(object);
+        
+        // Adjust camera position based on model size
+        const finalBox = new THREE.Box3().setFromObject(object);
+        const finalSize = finalBox.getSize(new THREE.Vector3());
+        const maxSize = Math.max(finalSize.x, finalSize.y, finalSize.z);
+        
+        // Position camera to see the entire model with some margin
+        const distance = maxSize * 2;
+        camera.position.set(0, distance * 0.3, distance);
+        camera.lookAt(0, 0, 0);
+        camera.updateProjectionMatrix();
+        
+        console.log('Adjusted camera position:', camera.position);
+        
+        // Add a simple bounding box helper for debugging
+        const boxHelper = new THREE.Box3Helper(box, 0xff0000);
+        scene.add(boxHelper);
+        
         setIsLoading(false);
       },
       (progress) => {
@@ -149,6 +153,19 @@ const Hero = () => {
       (error) => {
         console.error('Error loading FBX model:', error);
         setIsLoading(false);
+        
+        // Create a fallback sphere if model fails to load
+        const geometry = new THREE.SphereGeometry(2, 32, 32);
+        const material = new THREE.MeshPhongMaterial({ 
+          color: 0x3B82F6,
+          transparent: true,
+          opacity: 0.8,
+          emissive: 0x1E40AF,
+          emissiveIntensity: 0.2
+        });
+        const sphere = new THREE.Mesh(geometry, material);
+        modelRef.current = sphere;
+        scene.add(sphere);
       }
     );
 
@@ -264,15 +281,27 @@ const Hero = () => {
               The Ultimate Global Online Hackathon - Code. Create. Compete.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-              <button className="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white px-8 py-4 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-2 shadow-lg shadow-blue-500/25">
-                <Play size={20} />
-                Watch Trailer
-              </button>
-              <button className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-8 py-4 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-2 shadow-lg shadow-blue-500/25">
-                <UserPlus size={20} />
-                Register Now
-              </button>
-            </div>
+  <a
+    href="https://www.youtube.com/watch?v=p8CHaDP3Bxg"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white px-8 py-4 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-2 shadow-lg shadow-blue-500/25"
+  >
+    <Play size={20} />
+    Watch Trailer
+  </a>
+
+  <a
+    href="https://docs.google.com/forms/d/e/1FAIpQLSehFwBX1yMcW1BjX-8XcC-vHnUgNE9Wv8iVvbSIO3361QneWg/viewform?pli=1&pli=1&pli=1&edit2=2_ABaOnucxaiQsOarIkNlEYleII0UX-lueNbcBAdyYHXPLfyUWP_s7iGIDg6UiFGUzpQ"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-8 py-4 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-2 shadow-lg shadow-blue-500/25"
+  >
+    <UserPlus size={20} />
+    Register Now
+  </a>
+</div>
+
           </div>
 
           {/* 3D Model - Now on the right */}
@@ -280,7 +309,7 @@ const Hero = () => {
             <div 
               ref={mountRef} 
               className="model-container relative cursor-grab active:cursor-grabbing"
-              style={{ width: '500px', height: '500px' }}
+              style={{ width: '600px', height: '600px' }}
             >
               {isLoading && (
                 <div className="absolute inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 rounded-lg">

@@ -1,5 +1,5 @@
 import React from 'react';
-import { FileText, Calendar, Github, Video, ExternalLink, AlertTriangle } from 'lucide-react';
+import { FileText, Calendar, Github, Video, ExternalLink, AlertTriangle, MessageCircle } from 'lucide-react';
 
 const Requirements = () => {
   const requirements = [
@@ -10,17 +10,17 @@ const Requirements = () => {
     },
     {
       icon: Video,
-      title: 'Demo Video (2-5 mins)',
+      title: 'Demo Video of your Project (2-5 mins)',
       description: 'A video demonstration of your project functionality'
     },
     {
       icon: FileText,
-      title: 'Written Explanation',
-      description: 'Detailed project description via Devpost submission'
+      title: 'Written Explanation of your Project',
+      description: 'Detailed project description done via Devpost'
     },
     {
       icon: ExternalLink,
-      title: 'Live Demo (Optional)',
+      title: 'Link to Live Demo (Optional)',
       description: 'Link to live demo of your project (helpful but not required)'
     }
   ];
@@ -28,19 +28,19 @@ const Requirements = () => {
   const importantDates = [
     {
       event: 'Opening Ceremony',
-      date: 'July 11th, 2025',
+      date: 'January 16th, 2025',
       time: '7:00 PM EST',
-      description: 'Kickoff event with announcements and team formation'
+      description: 'Kickoff event with theme announcement and team formation'
     },
     {
       event: 'Submissions Due',
-      date: 'July 13th, 2025',
+      date: 'January 18th, 2025',
       time: '12:00 PM EST',
       description: 'Final deadline for all project submissions'
     },
     {
       event: 'Closing Ceremony',
-      date: 'July 13th, 2025',
+      date: 'January 18th, 2025',
       time: '8:00 PM EST',
       description: 'Awards ceremony and winner announcements'
     }
@@ -54,9 +54,20 @@ const Requirements = () => {
 
   const registrationSteps = [
     'Sign up on Devpost',
-    'Sign up through Google Form',
-    'Join our Discord server (primary method of communication)'
+    'Join our Discord server (primary method of communication with participants)'
   ];
+
+  const workshopInfo = {
+    title: 'Workshop Schedule',
+    status: 'Coming soon',
+    description: 'All workshop links will be posted in our Discord server, and are hyperlinked on the schedule'
+  };
+
+  const themeInfo = {
+    title: 'Our Theme',
+    themeTrack: 'Theme Track: Announced during opening ceremony',
+    generalTrack: 'United Hacks is a platform where innovators can unleash their creativity without limitations. If you choose to compete in the "General" track, you have the freedom to explore diverse topics—from accessibility to mental health and beyond, nurturing the potential of your ideas!'
+  };
 
   return (
     <section id="requirements" className="py-20 bg-gray-900">
@@ -112,8 +123,43 @@ const Requirements = () => {
             </div>
             <div className="mt-6 p-4 bg-blue-500/10 rounded-lg border border-blue-500/20">
               <p className="text-blue-300 text-sm">
-                <strong>Note:</strong> Live stream links will be posted in our Discord server.
+                <strong>Note:</strong> The link to the live streams will be posted in our Discord server.
               </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Theme and Workshop Info */}
+        <div className="grid lg:grid-cols-2 gap-12 mb-16">
+          {/* Theme */}
+          <div className="bg-gradient-to-br from-gray-800 to-gray-900 p-8 rounded-xl border border-gray-700">
+            <h3 className="text-2xl font-bold text-white mb-6 flex items-center gap-3">
+              <FileText className="text-green-400" size={28} />
+              {themeInfo.title}
+            </h3>
+            <div className="space-y-4">
+              <div className="p-4 bg-green-500/10 rounded-lg border border-green-500/20">
+                <h4 className="text-green-400 font-semibold mb-2">Theme Track</h4>
+                <p className="text-gray-300">{themeInfo.themeTrack}</p>
+              </div>
+              <div className="p-4 bg-blue-500/10 rounded-lg border border-blue-500/20">
+                <h4 className="text-blue-400 font-semibold mb-2">General Track</h4>
+                <p className="text-gray-300">{themeInfo.generalTrack}</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Workshop Schedule */}
+          <div className="bg-gradient-to-br from-gray-800 to-gray-900 p-8 rounded-xl border border-gray-700">
+            <h3 className="text-2xl font-bold text-white mb-6 flex items-center gap-3">
+              <MessageCircle className="text-orange-400" size={28} />
+              {workshopInfo.title}
+            </h3>
+            <div className="space-y-4">
+              <div className="p-4 bg-orange-500/10 rounded-lg border border-orange-500/20">
+                <h4 className="text-orange-400 font-semibold mb-2">{workshopInfo.status}</h4>
+                <p className="text-gray-300">{workshopInfo.description}</p>
+              </div>
             </div>
           </div>
         </div>

@@ -4,11 +4,12 @@
 
 /* Three.js 3D Model Container */
 .model-container {
-  width: 500px;
-  height: 500px;
+  width: 600px;
+  height: 600px;
   position: relative;
   border-radius: 8px;
   overflow: hidden;
+  background: rgba(0, 0, 0, 0.1);
 }
 
 /* Smooth scroll */
